@@ -1,6 +1,15 @@
 import type { Task } from './types.ts';
 
-function TodoItem ({ task, onToggle }: { task: Task; onToggle: (text: string) => void }) {
+function TodoItem ({ task, onToggle, onDelete }: {
+    task: Task;
+    onToggle: (text: string) => void;
+    onDelete: (id: string) => void
+}) {
+
+    const handleDeleteClick = (e) => {
+        e.preventDefault();
+        onDelete(task.id);
+    }
 
     return (
         <li>
@@ -10,7 +19,10 @@ function TodoItem ({ task, onToggle }: { task: Task; onToggle: (text: string) =>
                 checked={task.done}
                 onChange={() => onToggle(task.id)}
             />
-            <button type={"button"}>Удалить</button>
+            <button
+                type={"button"}
+                onClick={handleDeleteClick}
+            >Удалить</button>
         </li>
     );
 }

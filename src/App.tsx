@@ -8,8 +8,6 @@ import type { Task } from "./types";
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
 
-    useEffect(() => console.log(tasks), tasks);
-
     const onAdd = (textMessage: string) => {
         const newTask: Task = {
             id: uuidv4(),
@@ -18,6 +16,10 @@ function App() {
         };
 
         setTasks(prev => [...prev, newTask]);
+    };
+
+    const onDelete = (soughtId: string) => {
+        setTasks(prev => prev.filter(el => el.id !== soughtId));
     };
 
     const onToggle = (soughtId: string) => {
@@ -29,7 +31,11 @@ function App() {
   return (
     <>
       <Filter/>
-      <TodoList tasks={tasks} onToggle={onToggle}/>
+      <TodoList
+          tasks={tasks}
+          onToggle={onToggle}
+          onDelete={onDelete}
+      />
       <TodoForm onAdd={onAdd}/>
     </>
   )

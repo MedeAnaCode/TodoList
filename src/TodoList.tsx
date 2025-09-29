@@ -1,7 +1,11 @@
 import TodoItem from "./TodoItem.tsx";
 import type { Task } from "./types";
 
-function TodoList ({ tasks, onToggle }: { tasks: ReadonlyArray<Task>; onToggle: (id: string) => void}) {
+function TodoList ({ tasks, onToggle, onDelete }: {
+    tasks: ReadonlyArray<Task>;
+    onToggle: (id: string) => void;
+    onDelete: (id: string) => void
+}) {
 
     return (
         <ul>
@@ -10,6 +14,7 @@ function TodoList ({ tasks, onToggle }: { tasks: ReadonlyArray<Task>; onToggle: 
                     key = {el.id}
                     task = {el}
                     onToggle={onToggle}
+                    onDelete={onDelete}
                 />
                 )
             )}
