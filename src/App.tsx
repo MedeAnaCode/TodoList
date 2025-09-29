@@ -8,6 +8,8 @@ import type { Task } from "./types";
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
 
+    useEffect(() => console.log(tasks), tasks);
+
     const onAdd = (textMessage: string) => {
         const newTask: Task = {
             id: uuidv4(),
@@ -18,10 +20,16 @@ function App() {
         setTasks(prev => [...prev, newTask]);
     };
 
+    const onToggle = (soughtId: string) => {
+        setTasks(prev =>
+            prev.map(el => (el.id === soughtId ? { ...el, done: !el.done } : el))
+        );
+    };
+
   return (
     <>
       <Filter/>
-      <TodoList tasks={tasks}/>
+      <TodoList tasks={tasks} onToggle={onToggle}/>
       <TodoForm onAdd={onAdd}/>
     </>
   )
