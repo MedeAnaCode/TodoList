@@ -1,4 +1,5 @@
 import TodoItem from "./TodoItem.tsx";
+import type { Task } from "./types";
 
 function TodoList ({tasks}) {
 
