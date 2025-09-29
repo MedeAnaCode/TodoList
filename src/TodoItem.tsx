@@ -15,12 +15,12 @@ function TodoItem ({ task, onToggle, onDelete }: {
         <li>
             <div>{task.text}</div>
             <input
-                type={"checkbox"}
+                type="checkbox"
                 checked={task.done}
                 onChange={() => onToggle(task.id)}
             />
             <button
-                type={"button"}
+                type="button"
                 onClick={handleDeleteClick}
             >Удалить</button>
         </li>

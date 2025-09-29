@@ -26,7 +26,7 @@ function TodoForm ({ onAdd }: { onAdd: (text: string) => void}) {
                 />
             </label>
             <button
-                type={"submit"}
+                type="submit"
             >Добавить</button>
         </form>
     );

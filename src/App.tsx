@@ -3,10 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 import Filter from "./Filter.tsx";
 import TodoList from "./TodoList.tsx";
 import TodoForm from "./TodoForm.tsx";
-import type { Task } from "./types";
+import type { Task, FilterPattern } from "./types";
 
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
+    const [filter, setFilter] = useState<FilterPattern>('all');
+
+    useEffect(() => console.log(filter), [filter])
 
     const onAdd = (textMessage: string) => {
         const newTask: Task = {
@@ -28,9 +31,14 @@ function App() {
         );
     };
 
+    const onFilterChange = (next: FilterPattern) => {setFilter(next)};
+
   return (
     <>
-      <Filter/>
+      <Filter
+          value={filter}
+          onChange={onFilterChange}
+      />
       <TodoList
           tasks={tasks}
           onToggle={onToggle}
