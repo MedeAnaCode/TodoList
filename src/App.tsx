@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import { v4 as uuidv4 } from 'uuid';
 import Filter from "./Filter.tsx";
 import TodoList from "./TodoList.tsx";
@@ -8,8 +8,6 @@ import type { Task, FilterPattern } from "./types";
 function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [filter, setFilter] = useState<FilterPattern>('all');
-
-    useEffect(() => console.log(filter), [filter])
 
     const onAdd = (textMessage: string) => {
         const newTask: Task = {
@@ -33,6 +31,11 @@ function App() {
 
     const onFilterChange = (next: FilterPattern) => {setFilter(next)};
 
+    const visibleTasks =
+        filter === 'active' ? tasks.filter(el => !el.done)
+        : filter === 'done' ? tasks.filter(el =>  el.done)
+        : tasks;
+
   return (
     <>
       <Filter
@@ -40,7 +43,7 @@ function App() {
           onChange={onFilterChange}
       />
       <TodoList
-          tasks={tasks}
+          tasks={visibleTasks}
           onToggle={onToggle}
           onDelete={onDelete}
       />
